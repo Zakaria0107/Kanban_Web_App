@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap');
+
+@layer components {
+    .label  {
+      @apply block mb-3 text-white text-xs font-semibold ;
+    }
+    .field {
+        @apply text-sm bg-transparent border-2 border-[#3E3F4E] outline-none w-[100%] py-2 px-4 text-white rounded focus:border-[#635fc7] duration-300 ; 
+    }
+    .actions_btns {
+        @apply w-[100%] py-2 text-sm font-bold my-2 rounded-full ; 
+    }
+    .board {
+      @apply w-[100%] py-2 mb-2 flex items-center font-bold capitalize text-[#828fa3] ; 
+    }
+    .selected_board {
+      @apply w-[100%] bg-[#635FC7] py-2 mb-2 text-white flex items-center font-bold capitalize rounded-r-full relative  after:absolute after:w-[50px] after:h-[100%] after:bg-[#635FC7] after:top-0 after:left-[-50px]; 
+    }
+    .layer {
+      @apply absolute top-0 right-0 left-0 bottom-0 bg-black/[.5] flex justify-center items-center ;
+    }
+    .box {
+      @apply  w-[100%] h-[100vh] md:max-h-[100vh] overflow-y-scroll scrollbar scrollbar-thumb-[#20212C] scrollbar-track-[#2B2C37] md:h-auto md:w-[500px] bg-[#2B2C37] md:px-8 p-4 md:py-10 rounded
+    }
+  }
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
