@@ -1,15 +1,14 @@
-import AddBoard from "./components/board/AddBoard";
-import Container from "./components/Container";
+import AddBoard from "./components/board/AddBoard"
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
+import Container from "./components/Container"
 import store from "./store/UI/StoreConfiguration";
 import { useState } from "react";
 import boards from "./store/DATA/StoreConfiguration"
 import { GET_BOARDS_REQURST } from "./store/DATA/Reducer";
-
 function App() {
-  const [addBoard , setAddBoard] = useState(false)
-  store.subscribe(() => setAddBoard(store.getState())) 
+  const [showAddBoard , setShowAddBoard] = useState(false)
+  store.subscribe(() => setShowAddBoard(store.getState())) 
   boards.dispatch(GET_BOARDS_REQURST())
   return (
     <div className="App md:flex">
@@ -18,7 +17,7 @@ function App() {
         <Header/>
         <Container/>
       </div>
-      {addBoard ? <AddBoard /> : null}
+      {showAddBoard ? <AddBoard /> : null}
     </div>
   );
 }

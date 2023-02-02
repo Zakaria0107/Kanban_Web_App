@@ -6,6 +6,7 @@ import dataStore from '../../store/DATA/StoreConfiguration';
 import axios from 'axios';
 import { activeBoard } from '../../store/DATA/Reducer';
 
+
 export default function TaskDetails(props) {
     const box = useRef()
     let task = props.task
@@ -58,8 +59,16 @@ export default function TaskDetails(props) {
             <h4 className='text-white text-xs font-bold mt-4'>subtasks ({task.subTasks.length})</h4>
             {task.subTasks.map((elt , index )=> 
               <div className='bg-[#20212C] flex p-4 rounded-lg mt-2'>
-                { elt.done ?<input type="checkbox" checked onChange={() => subTasks[index].done = !subTasks[index].done} /> :
-                <input type="checkbox" onChange={() => subTasks[index].done = !subTasks[index].done} /> }
+                { elt.done ?<input type="checkbox" checked onChange={() => {
+                    let arr = subTasks
+                    arr = arr.map((elt1 , i ) => index == i ?{...elt1 , done : !elt.done }: elt1)
+                    setSubTasks(arr)
+                }} /> :
+                <input type="checkbox" onChange={() => {
+                    let arr = subTasks
+                    arr = arr.map((elt1 , i ) => index == i ?{...elt1 , done : !elt.done  }: elt1)
+                    setSubTasks(arr)
+                }} /> }
                 <p className='text-white text-xs font-semibold ml-4'>{elt.name}</p>
             </div>
             )}

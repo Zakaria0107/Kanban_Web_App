@@ -66,7 +66,12 @@ export default function UpdateTask(props) {
                 <label className='label'>Subtasks</label>
                 {subTasks.map((elt , index) => 
                     (<div className='flex justify-between items-center' key={index}>
-                        <input type="text" className='field mb-2 w-[90%]' value={elt.name}  onChange={(event) => subTasks[index].name=event.target.value} />
+                        <input type="text" className='field mb-2 w-[90%]' value={elt.name}  onChange={(e) => {
+                            let arr = subTasks
+                            arr = arr.map((elt1 , i ) => index == i ?{name:  e.target.value  , done : false }: elt1)
+                            setSubTasks(arr)
+                            }} 
+                        />
                         <button type="button" onClick={() => removeColumn(index)}  ><svg width="15" height="15" xmlns="http://www.w3.org/2000/svg"><g fill="#828FA3" fillRule="evenodd"><path d="m12.728 0 2.122 2.122L2.122 14.85 0 12.728z"></path><path d="M0 2.122 2.122 0 14.85 12.728l-2.122 2.122z"></path></g></svg></button>
                     </div>))}
             </div>
