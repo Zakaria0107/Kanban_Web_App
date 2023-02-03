@@ -33,7 +33,7 @@ exports.signIn = (req ,  res) => {
     try {
         User.findOne({email}, async (err, user) => {
             if(err || !user) {
-                return res.status(400).json({error: "Wrong email or password"})
+                return res.status(400).json({error: "This user doesn't exist"})
             }
             const isValid = await bcrypt.compare(password, user.password);
             if(!isValid) {

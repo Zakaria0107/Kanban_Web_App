@@ -32,14 +32,19 @@ export default function UpdateTask(props) {
     })
 
     const updateTask = () => {
-        axios.put(`${process.env.REACT_APP_API_URL}/task/${data._id}/${props.task.columnId}/${props.task._id}` , 
+        const user_id = localStorage.getItem("id")
+        const get_token = localStorage.getItem('token')
+        axios.put(`${process.env.REACT_APP_API_URL}/task/${user_id}/${data._id}/${props.task.columnId}/${props.task._id}` , 
         {
           title  , 
           descreption , 
           subTasks, 
           columnId , 
           boardId : data._id
-        })
+        } ,  { headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${get_token}`
+            }})
         .then ( res => {
             props.setupdateTask(false)
           dataStore.dispatch(GET_BOARDS_REQURST())

@@ -26,11 +26,14 @@ exports.getOneBoard = (req , res) => {
 
 
 exports.AddBoard = (req , res) => {
+    if(req.body.name == "")
+        return res.status(400).json({error : "Empty board name "})
+    
     const board = new Board({name : req.body.name  , user_Id : req.params.Uid })
     let columns = []
     req.body.columns.forEach((element , index )=> {
         columns[index] = new Column({name : element.name  , tasks : []  , boardId : board._id})
-        columns[index].save((err , data)=> {
+        columns[index].save((err , data )=> {
             if(err) {
                 return res.status(400).json({error: err})
             }
