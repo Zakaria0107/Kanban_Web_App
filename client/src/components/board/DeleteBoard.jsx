@@ -20,7 +20,14 @@ export default function DeleteBoard(props) {
 
     const deleteBoard = () => {
       if(activeBoard){
-        axios.delete(`http://localhost:3001/api/board/${activeBoard.data._id}`)
+        const user_id = localStorage.getItem("id")
+        const get_token = localStorage.getItem('token')
+        
+        axios.delete(`${process.env.REACT_APP_API_URL}/board/${user_id}/${activeBoard.data._id}` , 
+        { headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${get_token}`
+          }})
         .then(res => {
           console.log(res)
             if(res.status == 200) {
@@ -36,7 +43,6 @@ export default function DeleteBoard(props) {
             console.log(err.message)
         })
       }
-      console.log("sellect one")
   }
   return (
     <div className='layer'>

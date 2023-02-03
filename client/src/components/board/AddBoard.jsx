@@ -31,7 +31,13 @@ export default function AddBoard() {
         columns.forEach(elt => {
             cols.push({name : elt})
         })
-        axios.post('http://localhost:3001/api/board/', {name : name , columns : cols} )
+        const user_id = localStorage.getItem('id')
+        const get_token = localStorage.getItem('token')
+        axios.post(`${process.env.REACT_APP_API_URL}/board/${user_id}`, {name : name , columns : cols} ,
+        { headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${get_token}`
+            }} )
         .then(res => {
             if(res.status == 200) {
                 Swal.fire(

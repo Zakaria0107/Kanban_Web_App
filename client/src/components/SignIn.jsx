@@ -1,22 +1,24 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { Navigate, NavLink, redirect } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 export default function SignIn(props) {
+    const nav = useNavigate()
     const [email , setEmail ] = useState("")
     const [password , setPassword] = useState("")
 
     const signIn = () => {
-        axios.post("http://localhost:3001/api/user/signIn" , {
+        axios.post(`${process.env.REACT_APP_API_URL}/user/signIn`, {
             email : email , 
             password : password
         })
         .then(res => {
             localStorage.setItem("token" , res.data.token)
             localStorage.setItem("id" , res.data._id)
-            console.log()
+            nav("/")
         })
-        .catch(err => console.log(err))
+        .catch(err => Swal.fire(err.response.data.error))
     }
   return (
     <div className='box'>

@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
-import './index.css'
+import App from './views/App';
+import './assets/css/index.css'
 import store  from './store/UI/StoreConfiguration'
 import { Provider } from 'react-redux' 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from './Login';
+import Login from './views/Login';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

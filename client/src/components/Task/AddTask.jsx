@@ -31,11 +31,17 @@ export default function AddTask(props) {
         let columnId = column != "" ? column : activeBoard.columns[0]._id
         subtasks.forEach(elt => sub.push({name : elt , done : false}))
     
-        axios.post(`http://localhost:3001/api/task/${activeBoard._id}/${columnId}`, {
+        const user_id = localStorage.getItem("id")
+        const get_token = localStorage.getItem('token')
+ 
+        axios.post(`${process.env.REACT_APP_API_URL}/task/${user_id}/${activeBoard._id}/${columnId}`, {
             title : title , 
             descreption: descreption, 
             subTasks : sub
-        } )
+        }  , { headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${get_token}`
+            }})
         .then(res => {
             if(res.status == 200) {
                 Swal.fire(

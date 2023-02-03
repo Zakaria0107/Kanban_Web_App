@@ -4,7 +4,7 @@ const Task = require('./../models/Task')
 
 
 exports.getAllBoards = (req , res) => {
-    let query = Board.find({})
+    let query = Board.find({user_Id : req.params.Uid})
     query.exec((err , data) => { 
         if(err)
             return res.status(404).json({error : err})
@@ -14,7 +14,7 @@ exports.getAllBoards = (req , res) => {
 
 
 exports.getOneBoard = (req , res) => {
-    let query  = Board.findOne({_id : req.params.boardId})
+    let query  = Board.findOne({_id : req.params.boardId ,   user_Id : req.params.Uid})
 
     query.exec((err , data) => {
         if(err)
@@ -26,7 +26,7 @@ exports.getOneBoard = (req , res) => {
 
 
 exports.AddBoard = (req , res) => {
-    const board = new Board({name : req.body.name})
+    const board = new Board({name : req.body.name  , user_Id : req.params.Uid })
     let columns = []
     req.body.columns.forEach((element , index )=> {
         columns[index] = new Column({name : element.name  , tasks : []  , boardId : board._id})
@@ -48,7 +48,7 @@ exports.AddBoard = (req , res) => {
 
 exports.deleteBoard = (req, res) => {
     // delete  all columns of the board
-    let query = Column.deleteMany({bordId : req.params.boardId})
+    let query = Column.deleteMany({bordId : req.params.boardId , user_Id : req.params.Uid})
     query.exec((err , data) => {
         if(err) {
             return res.status(400).json({error: err})
@@ -86,7 +86,7 @@ exports.addColumns = (req , res ) => {
     });
 
 
-    let query = Board.findByIdAndUpdate({_id : req.params.boardId} , {$push : {columns : { $each: columns }}})
+    let query = Board.findByIdAndUpdate({_id : req.params.boardId , user_Id : req.params.Uid} , {$push : {columns : { $each: columns }}})
     query.exec((err , data) => {
         if(err) 
             return res.status(400).json({err : err})

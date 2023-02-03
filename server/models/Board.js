@@ -6,8 +6,10 @@ const boardSchema = new mongoose.Schema({
     },
     columns : {
         type : []
+    },
+    user_Id : {
+        type : String
     }
-
 })
 
 module.exports = mongoose.model("Board" , boardSchema)

@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt")
 exports.signUp = async (req , res) => {
     const {name, email , password , passwordRep} = req.body
     if(password != passwordRep)
-        return res.status(400).json({err : "passwords not match"})
+        return res.status(400).json({error : "Passwords not match"})
 
     try {
         // Hashing passwords

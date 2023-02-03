@@ -18,7 +18,13 @@ export default function DeleteTask(props) {
     })
 
     const deleteTask = () => {
-      axios.delete(`http://localhost:3001/api/task/${props.task.boardId}/${props.task.columnId}/${props.task._id}`)
+      const user_id = localStorage.getItem("id")
+      const get_token = localStorage.getItem('token')
+      axios.delete(`${process.env.REACT_APP_API_URL}/task/${user_id}/${props.task.boardId}/${props.task.columnId}/${props.task._id}` , 
+      { headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${get_token}`
+        }})
       .then(res => {
           if(res.status == 200) {
               Swal.fire(

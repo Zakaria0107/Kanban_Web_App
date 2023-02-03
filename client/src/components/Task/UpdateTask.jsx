@@ -32,7 +32,7 @@ export default function UpdateTask(props) {
     })
 
     const updateTask = () => {
-        axios.put(`http://localhost:3001/api/task/${data._id}/${props.task.columnId}/${props.task._id}` , 
+        axios.put(`${process.env.REACT_APP_API_URL}/task/${data._id}/${props.task.columnId}/${props.task._id}` , 
         {
           title  , 
           descreption , 

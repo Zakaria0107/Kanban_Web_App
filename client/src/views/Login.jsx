@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
-import SignIn from './components/SignIn'
-import SignUp from './components/SignUp'
+import SignIn from '../components/SignIn'
+import SignUp from '../components/SignUp'
+
 export default function Login() {
     const [signInform  , setSignInForm]= useState(true)
     const [signUpform  , setSignUpForm]= useState(false)
+
     const switchForm = () => {
         setSignInForm(!signInform)
         setSignUpForm(!signUpform)

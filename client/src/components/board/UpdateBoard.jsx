@@ -27,10 +27,16 @@ export default function UpdateBoard(props) {
     setColumns(columns.filter((elt , index) => index != id))
   }
   const updateBoard = () => {
-    axios.put(`http://localhost:3001/api/board/${data._id}` , {
+    const user_id = localStorage.getItem("id")
+    const get_token = localStorage.getItem('token')
+
+    axios.put(`${process.env.REACT_APP_API_URL}/board/${user_id}/${data._id}` , {
       name : name , 
       columns : columns
-    }).then(res => {
+    } , { headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${get_token}`
+      }}).then(res => {
         Swal.fire(
           'Updated with success',
           '',
