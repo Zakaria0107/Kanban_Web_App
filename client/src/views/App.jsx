@@ -15,26 +15,26 @@ function App() {
   const nav = useNavigate()
   store.subscribe(() => setShowAddBoard(store.getState())) 
 
-  useEffect(() => {
-    if(!localStorage.getItem('token')){
-      nav('/login')
-    }else {
-      const id = localStorage.getItem('id')
-      const get_token = localStorage.getItem("token")
+  // useEffect(() => {
+  //   if(!localStorage.getItem('token')){
+  //     nav('/login')
+  //   }else {
+  //     const id = localStorage.getItem('id')
+  //     const get_token = localStorage.getItem("token")
 
-      axios.get(`${process.env.REACT_APP_API_URL}/user/${id}` ,
-        { headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${get_token}`
-        }}
-      ).then(res => boards.dispatch(GET_BOARDS_REQURST()))
-      .catch((err) => {
-        localStorage.clear()
-        nav('/login')
-      })
+  //     axios.get(`${process.env.REACT_APP_API_URL}/user/${id}` ,
+  //       { headers: {
+  //       'Content-Type': 'application/json',
+  //       Authorization: `Bearer ${get_token}`
+  //       }}
+  //     ).then(res => boards.dispatch(GET_BOARDS_REQURST()))
+  //     .catch((err) => {
+  //       localStorage.clear()
+  //       nav('/login')
+  //     })
       
-    }
-  })
+  //   }
+  // })
     
   return (
     <div className="App md:flex">

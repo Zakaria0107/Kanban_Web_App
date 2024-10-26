@@ -1,4 +1,3 @@
-import axios from "axios"
 import { GET_BOARDS_REQURST, GET_BOARDS_SUCCESS , GET_BOARDS_FAILD} from './Reducer'
 
 const getData = ({dispatch}) => next => async action => {
